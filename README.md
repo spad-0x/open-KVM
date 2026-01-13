@@ -1,13 +1,14 @@
-# Installation
-Linux
+# Requirements
+Debian Based
 ```bash
-sudo apt-get update
 sudo apt-get install libssl-dev
-sudo make
+```
+Arch Based
+```bash
+sudo pacman -S libssl-dev
 ```
 
-MacOS
+# Installation
 ```bash
-brew install openssl@3
-sudo make
+make
 ```
