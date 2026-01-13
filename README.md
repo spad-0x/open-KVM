@@ -7,6 +7,10 @@ Arch Based
 ```bash
 sudo pacman -S libssl-dev
 ```
+MacOS
+```bash
+brew install openssl@3
+```
 
 # Installation
 ```bash
