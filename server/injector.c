@@ -89,3 +89,31 @@ void inject_scroll(int32_t sx, int32_t sy) {
     CGEventPost(kCGHIDEventTap, scroll);
     CFRelease(scroll);
 }
+
+// <--- NUOVA FUNZIONE
+void inject_text(uint32_t ucs4) {
+    // 1. Creiamo un evento tastiera "finto" (non importa il keycode, usiamo 0)
+    CGEventRef event = CGEventCreateKeyboardEvent(NULL, 0, true);
+    
+    // 2. Impostiamo la stringa Unicode direttamente nell'evento
+    UniChar chars[2];
+    int len = 0;
+
+    // Conversione base UCS4 -> UTF-16 (macOS usa UTF-16)
+    if (ucs4 <= 0xFFFF) {
+        chars[0] = (UniChar)ucs4;
+        len = 1;
+    } else {
+        // Gestione caratteri estesi (emoji ecc), opzionale ma utile
+        ucs4 -= 0x10000;
+        chars[0] = (UniChar)((ucs4 >> 10) + 0xD800);
+        chars[1] = (UniChar)((ucs4 & 0x3FF) + 0xDC00);
+        len = 2;
+    }
+
+    CGEventKeyboardSetUnicodeString(event, len, chars);
+
+    // 3. Inviamo l'evento
+    CGEventPost(kCGHIDEventTap, event);
+    CFRelease(event);
+}

@@ -10,8 +10,9 @@
 typedef enum {
     MSG_AUTH = 0x01,
     MSG_MOUSE_MOVE = 0x10,
-    MSG_KEY_EVENT  = 0x11,
-    MSG_MOUSE_SCROLL = 0x12
+    MSG_KEY_EVENT  = 0x11,   // Per tasti speciali (Cmd, Ctrl, F1...)
+    MSG_MOUSE_SCROLL = 0x12,
+    MSG_TEXT_INPUT = 0x13    // <--- NUOVO: Per testo puro (A, @, €)
 } MsgType;
 
 // Header pacchetto (Packed = niente padding del compilatore)
@@ -39,4 +40,9 @@ typedef struct __attribute__((packed)) {
     int32_t sy; // Scroll verticale
 } ScrollPayload;
 
-#endif
+// Text Payload
+typedef struct __attribute__((packed)) {
+    uint32_t ucs4; // Codice Unicode (supporta anche Emoji se volessi)
+} TextPayload;
+
+#endif // PROTOCOL_H

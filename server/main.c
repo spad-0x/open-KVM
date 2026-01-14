@@ -76,6 +76,11 @@ void handle_client(SSL *ssl, const char* client_ip) {
                 inject_scroll(val_sx, val_sy);
                 break;
             }
+            case MSG_TEXT_INPUT: {
+                TextPayload *tp = (TextPayload*)buffer;
+                inject_text(ntohl(tp->ucs4));
+                break;
+            }
         }
     }
 }
