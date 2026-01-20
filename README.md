@@ -16,3 +16,12 @@ brew install openssl@3
 ```bash
 make
 ```
+
+# Usage
+```bash
+./open-kvm-server # Server
+```
+
+```bash
+sudo ./open-kvm-client <server_ip> /dev/input/<your kb fd>
+```
