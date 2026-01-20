@@ -25,5 +25,3 @@ make
 ```bash
 sudo ./open-kvm-client <server_ip> /dev/input/<your kb fd>
 ```
-
-
